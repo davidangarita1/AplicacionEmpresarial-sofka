@@ -88,4 +88,17 @@ public class QuestionRouter {
                         .body(BodyInserters.fromPublisher(deleteUseCase.apply(request.pathVariable("id")), Void.class))
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> update(UpdateUseCase updateUseCase) {
+        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO ->  updateUseCase.apply(questionDTO)
+                .flatMap(result -> ServerResponse.ok()
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .bodyValue(result));
+
+        return route(
+                PUT("/update").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(QuestionDTO.class).flatMap(executor)
+        );
+    }
 }
