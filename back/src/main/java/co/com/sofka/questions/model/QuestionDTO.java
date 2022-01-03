@@ -1,6 +1,9 @@
 package co.com.sofka.questions.model;
 
 
+import co.com.sofka.questions.utils.Category;
+import co.com.sofka.questions.utils.Type;
+
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +17,9 @@ public class QuestionDTO {
     @NotBlank
     private String question;
     @NotBlank
-    private String type;
+    private Type type;
     @NotBlank
-    private String category;
+    private Category category;
     private List<AnswerDTO> answers;
 
 
@@ -24,14 +27,14 @@ public class QuestionDTO {
 
     }
 
-    public QuestionDTO(String userId, String question, String type, String category) {
+    public QuestionDTO(String userId, String question, Type type, Category category) {
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
     }
 
-    public QuestionDTO(String id, String userId, String question, String type, String category) {
+    public QuestionDTO(String id, String userId, String question, Type type, Category category) {
         this.id = id;
         this.userId = userId;
         this.question = question;
@@ -72,19 +75,19 @@ public class QuestionDTO {
         this.question = question;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
