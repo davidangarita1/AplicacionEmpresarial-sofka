@@ -1,7 +1,11 @@
 package co.com.sofka.questions.model;
 
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,8 +15,8 @@ public class AnswerDTO {
     @NotBlank
     private String questionId;
     @NotBlank
+    @Size(min = 15, max = 250)
     private String answer;
-
     private Integer position;
 
 
