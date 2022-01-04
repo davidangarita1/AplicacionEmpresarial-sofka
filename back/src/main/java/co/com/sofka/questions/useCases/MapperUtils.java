@@ -2,10 +2,11 @@ package co.com.sofka.questions.useCases;
 
 import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.collections.Question;
+import co.com.sofka.questions.collections.Rate;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.model.RateDTO;
 import org.springframework.stereotype.Component;
-
 import java.util.function.Function;
 
 @Component
@@ -51,5 +52,26 @@ public class MapperUtils {
                 entity.getUserId(),
                 entity.getAnswer()
         );
+    }
+
+    public Function<Rate, RateDTO> mapEntityToRate() {
+        return entity -> new RateDTO(
+                entity.getId(),
+                entity.getUserId(),
+                entity.getAnswerId(),
+                entity.getRate()
+        );
+    }
+
+    public Function<RateDTO, Rate> mapperToRate() {
+        return updateRate -> {
+            var rate = new Rate();
+
+            rate.setId(updateRate.getId());
+            rate.setUserId(updateRate.getUserId());
+            rate.setAnswerId(updateRate.getAnswerId());
+            rate.setRate(updateRate.getRate());
+            return rate;
+        };
     }
 }
