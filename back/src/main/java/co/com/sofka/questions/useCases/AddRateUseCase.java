@@ -1,5 +1,7 @@
 package co.com.sofka.questions.useCases;
 
+import co.com.sofka.questions.collections.Question;
+import co.com.sofka.questions.collections.Rate;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.model.RateDTO;
@@ -26,18 +28,36 @@ public class AddRateUseCase implements SaveRate{
         this.answerRepository = answerRepository;
     }
 
-    public Mono<QuestionDTO> apply(RateDTO rateDTO) {
+    public Mono<String> apply(RateDTO rateDTO) {
         Objects.requireNonNull(rateDTO.getUserId(), "IdUser of the rate is required");
         Objects.requireNonNull(rateDTO.getAnswerId(), "IdAnswer of the rate is required");
 
-        return answerRepository.
+     return   rateRepository.findByUserIdAndAnswerId(rateDTO.getUserId(),rateDTO.getAnswerId())
+                .switchIfEmpty(rateRepository.save(mapperUtils.mapperToRate().apply(rateDTO))
+                ).map(Rate::getId);
 
-        /*return getUseCase.apply(rateDTO.getAnswerId()).flatMap(question ->
+
+    }
+}
+
+
+
+
+
+    /*return getUseCase.apply(rateDTO.getAnswerId()).flatMap(question ->
                 answerRepository.save(mapperUtils.mapperToAnswer().apply(rateDTO))
                         .map(answer -> {
                             question.getAnswers().add(rateDTO);
                             return question;
                         })
         );*/
-    }
-}
+
+/*.flatMap(
+ *//*  rate -> {
+                            answerRepository.findById(rateDTO.getAnswerId()).map( aw->{
+                                        aw.setPosition(rate.getRate());
+                                        return answerRepository.save(aw);
+                                    }
+                            );
+                            return Mono.just("oe");
+                        }*/

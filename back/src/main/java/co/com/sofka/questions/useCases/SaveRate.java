@@ -8,5 +8,5 @@ import javax.validation.Valid;
 
 @FunctionalInterface
 public interface SaveRate {
-    Mono<QuestionDTO> apply(@Valid RateDTO rateDTO);
+    Mono<String> apply(@Valid RateDTO rateDTO);
 }
