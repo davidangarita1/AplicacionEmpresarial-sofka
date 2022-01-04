@@ -1,17 +1,17 @@
 package co.com.sofka.questions.model;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class RateDTO {
-    @NotBlank
     private String id;
     @NotBlank
     private String userId;
     @NotBlank
     private String answerId;
-    @Size(min = -1, max = 1)
+    @Range(min = -1, max = 1, message = "Error Rate")
     private Integer rate;
 
     public RateDTO() {

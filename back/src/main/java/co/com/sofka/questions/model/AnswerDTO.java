@@ -12,7 +12,7 @@ public class AnswerDTO {
     @NotBlank
     private String questionId;
     @NotBlank
-    @Size(min = 15, max = 250)
+    @Size(min = 15, max = 250, message = "Error de tamaño de caracteres")
     private String answer;
     private Integer position;
     private List<Rate> rates;
