@@ -101,4 +101,14 @@ public class QuestionRouter {
                 request -> request.bodyToMono(QuestionDTO.class).flatMap(executor)
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> findByCategory(FindAllByCategoryUseCase findAllByCategoryUseCase) {
+        return route(
+                GET("/filterCategory/{category}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(findAllByCategoryUseCase.apply(request.pathVariable("category")), QuestionDTO.class))
+        );
+    }
 }
