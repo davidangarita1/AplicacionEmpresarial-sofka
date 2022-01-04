@@ -15,7 +15,6 @@ public class Question {
     private Type type;
     private Category category;
 
-
     public String getId() {
         return id;
     }
