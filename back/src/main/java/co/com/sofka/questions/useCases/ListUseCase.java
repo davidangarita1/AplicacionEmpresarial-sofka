@@ -1,14 +1,12 @@
 package co.com.sofka.questions.useCases;
 
 import co.com.sofka.questions.model.QuestionDTO;
-import co.com.sofka.questions.repositories.AnswerRepository;
 import co.com.sofka.questions.repositories.QuestionRepository;
+import co.com.sofka.questions.utils.MapperUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Service
