@@ -27,21 +27,9 @@ public class ListUseCase implements Supplier<Flux<QuestionDTO>> {
     @Override
     public Flux<QuestionDTO> get() {
         return questionRepository.findAll()
-                .map(mapperUtils.mapEntityToQuestion())
-                .flatMap(mapQuestionAggregate());
+                .map(mapperUtils.mapEntityToQuestion());
     }
 
-    private Function<QuestionDTO, Mono<QuestionDTO>> mapQuestionAggregate() {
-        return questionDTO ->
-                Mono.just(questionDTO).zipWith(
-                        answerRepository.findAllByQuestionId(questionDTO.getId())
-                                .map(mapperUtils.mapEntityToAnswer())
-                                .collectList(),
-                        (question, answers) -> {
-                            question.setAnswers(answers);
-                            return question;
-                        }
-                );
-    }
+
 
 }

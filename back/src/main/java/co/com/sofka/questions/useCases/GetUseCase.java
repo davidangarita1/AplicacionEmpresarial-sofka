@@ -1,8 +1,10 @@
 package co.com.sofka.questions.useCases;
 
+import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.repositories.AnswerRepository;
 import co.com.sofka.questions.repositories.QuestionRepository;
+import co.com.sofka.questions.repositories.RateRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
@@ -16,11 +18,13 @@ public class GetUseCase implements Function<String, Mono<QuestionDTO>> {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final MapperUtils mapperUtils;
+    private final RateRepository rateRepository;
 
-    public GetUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository, AnswerRepository answerRepository) {
+    public GetUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository, AnswerRepository answerRepository, RateRepository rateRepository) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.mapperUtils = mapperUtils;
+        this.rateRepository = rateRepository;
     }
 
     @Override
@@ -40,6 +44,20 @@ public class GetUseCase implements Function<String, Mono<QuestionDTO>> {
                         (question, answers) -> {
                             question.setAnswers(answers);
                             return question;
+                        }
+
+                );
+    }
+
+    private Function<AnswerDTO, Mono<AnswerDTO>> mapAnswerAggregate() {
+        return answerDTO ->
+                Mono.just(answerDTO).zipWith(
+                        rateRepository.findAllByAnswerId(answerDTO.getId())
+                                .map(mapperUtils.mapEntityToRate())
+                                .collectList(),
+                        (answer, rates) -> {
+                            answer.setRates(rates);
+                            return answer;
                         }
                 );
     }

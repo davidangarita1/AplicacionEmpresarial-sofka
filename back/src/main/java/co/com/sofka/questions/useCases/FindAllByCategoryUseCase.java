@@ -29,20 +29,6 @@ public class FindAllByCategoryUseCase implements Function<String, Flux<QuestionD
     public Flux<QuestionDTO> apply(String category) {
         Objects.requireNonNull(category, "Category is required");
         return questionRepository.findAllByCategory(category)
-                .map(mapperUtils.mapEntityToQuestion())
-                .flatMap(mapQuestionAggregate());
-    }
-
-    private Function<QuestionDTO, Mono<QuestionDTO>> mapQuestionAggregate() {
-        return questionDTO ->
-                Mono.just(questionDTO).zipWith(
-                        answerRepository.findAllByQuestionId(questionDTO.getId())
-                                .map(mapperUtils.mapEntityToAnswer())
-                                .collectList(),
-                        (question, answers) -> {
-                            question.setAnswers(answers);
-                            return question;
-                        }
-                );
+                .map(mapperUtils.mapEntityToQuestion());
     }
 }

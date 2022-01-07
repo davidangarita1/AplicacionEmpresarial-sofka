@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 public class AnswerDTO {
+    private String id;
     @NotBlank
     private String userId;
     @NotBlank
@@ -15,7 +16,7 @@ public class AnswerDTO {
     @Size(min = 15, max = 250, message = "Error de tamaño de caracteres")
     private String answer;
     private Integer position;
-    private List<Rate> rates;
+    private List<RateDTO> rates;
 
     public AnswerDTO() {
 
@@ -27,9 +28,17 @@ public class AnswerDTO {
         this.answer = answer;
     }
 
-    public List<Rate> getRates() {
+    public List<RateDTO> getRates() {
         this.rates = Optional.ofNullable(rates).orElse(new ArrayList<>());
         return rates;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Integer getPosition() {
@@ -64,7 +73,7 @@ public class AnswerDTO {
         this.position = position;
     }
 
-    public void setRates(List<Rate> rates) {
+    public void setRates(List<RateDTO> rates) {
         this.rates = rates;
     }
 
