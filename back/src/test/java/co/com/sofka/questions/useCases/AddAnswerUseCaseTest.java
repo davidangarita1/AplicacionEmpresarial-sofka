@@ -17,17 +17,17 @@ import reactor.core.publisher.Mono;
 @SpringBootTest
 class AddAnswerUseCaseTest {
     @SpyBean
-    AddAnswerUseCase addAnswerUseCase;
+    private AddAnswerUseCase addAnswerUseCase;
 
     @MockBean
-    GetUseCase getUseCase;
+    private GetUseCase getUseCase;
 
     @MockBean
     AnswerRepository answerRepository;
 
     @Test
     void addAnswerUseCaseTest(){
-        var question = new QuestionDTO("1asd2153453", "1234", "What id DDD in software?", Type.OPEN, Category.SOFTWARE_DEVELOPMENT);
+        var question = new QuestionDTO("1asd2153453", "1234", "What id DDD in software?", Type.OPEN, Category.SCIENCES);
 
         var answerDTO = new AnswerDTO("1asd2153453", "1234", "Domain Driven Design");
 

@@ -19,10 +19,10 @@ import static org.mockito.Mockito.*;
 class ListUseCaseTest {
 
     @MockBean
-    QuestionRepository repository;
+    private QuestionRepository repository;
 
     @SpyBean
-    ListUseCase listUseCase;
+    private ListUseCase listUseCase;
 
     @BeforeEach
     public void setup(){
