@@ -15,13 +15,11 @@ import java.util.function.Supplier;
 @Validated
 public class ListUseCase implements Supplier<Flux<QuestionDTO>> {
     private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
     private final MapperUtils mapperUtils;
 
-    public ListUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository, AnswerRepository answerRepository) {
+    public ListUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
         this.mapperUtils = mapperUtils;
-        this.answerRepository = answerRepository;
     }
 
     @Override
