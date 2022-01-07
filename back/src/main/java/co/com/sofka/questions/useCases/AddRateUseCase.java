@@ -15,15 +15,11 @@ import java.util.Objects;
 @Validated
 public class AddRateUseCase implements SaveRate{
     private final RateRepository rateRepository;
-    private final AnswerRepository answerRepository;
     private final MapperUtils mapperUtils;
-    private final GetUseCase getUseCase;
 
     public AddRateUseCase(MapperUtils mapperUtils, GetUseCase getUseCase, RateRepository rateRepository, AnswerRepository answerRepository) {
         this.rateRepository = rateRepository;
-        this.getUseCase = getUseCase;
         this.mapperUtils = mapperUtils;
-        this.answerRepository = answerRepository;
     }
 
     public Mono<String> apply(RateDTO rateDTO) {
@@ -37,25 +33,3 @@ public class AddRateUseCase implements SaveRate{
 
     }
 }
-
-
-
-
-
-    /*return getUseCase.apply(rateDTO.getAnswerId()).flatMap(question ->
-                answerRepository.save(mapperUtils.mapperToAnswer().apply(rateDTO))
-                        .map(answer -> {
-                            question.getAnswers().add(rateDTO);
-                            return question;
-                        })
-        );*/
-
-/*.flatMap(
- *//*  rate -> {
-                            answerRepository.findById(rateDTO.getAnswerId()).map( aw->{
-                                        aw.setPosition(rate.getRate());
-                                        return answerRepository.save(aw);
-                                    }
-                            );
-                            return Mono.just("oe");
-                        }*/
