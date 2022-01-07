@@ -27,7 +27,7 @@ class AddAnswerUseCaseTest {
 
     @Test
     void addAnswerUseCaseTest(){
-        var question = new QuestionDTO("1asd2153453", "1234", "What id DDD in software?", Type.OPEN, Category.SCIENCES);
+        var question = new QuestionDTO("1asd2153453", "1234", "What id DDD in software?", Type.OPEN, Category.SOFTWARE_DEVELOPMENT);
 
         var answerDTO = new AnswerDTO("1asd2153453", "1234", "Domain Driven Design");
 
