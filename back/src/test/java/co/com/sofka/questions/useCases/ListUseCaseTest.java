@@ -35,8 +35,7 @@ class ListUseCaseTest {
 
     @Test
     void listUseCaseTest(){
-        var question = new Question("1asd2153453", "123", "What id DDD in software",
-                Type.OPEN, Category.SOFTWARE_DEVELOPMENT);
+        var question = new Question("1asd2153453", "123", "What id DDD in software", Type.OPEN, Category.SOFTWARE_DEVELOPMENT);
 
         when(repository.findAll()).thenReturn(Flux.just(question ));
 

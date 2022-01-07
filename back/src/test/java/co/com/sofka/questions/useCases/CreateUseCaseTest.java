@@ -27,8 +27,7 @@ class CreateUseCaseTest {
     @Test
     void createUseCaseTest() {
 
-        var questionDT0 = new QuestionDTO("1asd2153453", "1234", "What id DDD in software",
-                Type.OPEN, Category.SCIENCES);
+        var questionDT0 = new QuestionDTO("1asd2153453", "1234", "What id DDD in software", Type.OPEN, Category.SCIENCES);
 
         var question = new Question("1asd2153453", "1234", "What id DDD in software",Type.OPEN, Category.SOFTWARE_DEVELOPMENT);
 

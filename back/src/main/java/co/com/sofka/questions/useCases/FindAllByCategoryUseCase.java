@@ -1,7 +1,6 @@
 package co.com.sofka.questions.useCases;
 
 import co.com.sofka.questions.model.QuestionDTO;
-import co.com.sofka.questions.repositories.AnswerRepository;
 import co.com.sofka.questions.repositories.QuestionRepository;
 import co.com.sofka.questions.utils.MapperUtils;
 import org.springframework.stereotype.Service;
@@ -15,12 +14,10 @@ import java.util.function.Function;
 @Validated
 public class FindAllByCategoryUseCase implements Function<String, Flux<QuestionDTO>> {
     private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
     private final MapperUtils mapperUtils;
 
-    public FindAllByCategoryUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository, AnswerRepository answerRepository) {
+    public FindAllByCategoryUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
-        this.answerRepository = answerRepository;
         this.mapperUtils = mapperUtils;
     }
 
